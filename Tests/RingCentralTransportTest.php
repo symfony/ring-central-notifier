@@ -60,7 +60,7 @@ final class RingCentralTransportTest extends TransportTestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::exactly(2))->method('getStatusCode')->willReturn(200);
         $response->expects(self::once())->method('getContent')->willReturn(json_encode(['id' => 'foo']));
-        $client = new MockHttpClient(function (string $method, string $url) use ($response): ResponseInterface {
+        $client = new MockHttpClient(static function (string $method, string $url) use ($response): ResponseInterface {
             self::assertSame('POST', $method);
             self::assertSame('https://platform.ringcentral.com/restapi/v1.0/account/~/extension/~/sms', $url);
 
